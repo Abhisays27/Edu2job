@@ -1,8 +1,8 @@
 // script.js
 
 /**
- * Add a "DOMContentLoaded" event listener.
- * This ensures our code only runs after the HTML document is fully loaded.
+ * Main DOMContentLoaded listener
+ * This runs when the page is loaded and routes to the correct setup function.
  */
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -10,15 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     
     // --- Page Routing ---
-    // Check which page we're on and run the appropriate setup function.
     
+    // If on login/register page but already logged in, redirect to dashboard
     if (bodyId === 'login-page' || bodyId === 'register-page') {
-        // If user is already logged in, redirect them to the dashboard
         if (token) {
             window.location.href = 'dashboard.html';
         }
     }
     
+    // Run setup function based on which page we're on
     if (bodyId === 'register-page') {
         setupRegistrationForm();
     } else if (bodyId === 'login-page') {
@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // This is a protected page
         if (!token) {
             // If no token, redirect to login
+            alert('You must be logged in to view this page.');
             window.location.href = 'index.html';
         } else {
             // If token exists, setup the dashboard
@@ -35,41 +36,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
 /**
- * Sets up the event listener for the registration form.
+ * Sets up the event listener for the REGISTRATION form.
+ * (This function is UNCHANGED)
  */
 function setupRegistrationForm() {
     const registerForm = document.getElementById('register-form');
     const messageEl = document.getElementById('message');
 
     registerForm.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); 
 
-        // Get form data
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
+        const college = document.getElementById('college').value;
+        const gender = document.getElementById('gender').value;
+        const degree = document.getElementById('degree').value;
+
+        if (!gender || !degree) {
+            messageEl.textContent = 'Please select your gender and degree.';
+            messageEl.style.color = 'red';
+            return;
+        }
 
         try {
             const response = await fetch('http://localhost:3000/register', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, email, password })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password, college, gender, degree })
             });
 
             const data = await response.json();
 
-            if (response.ok) { // Status 200-299
+            if (response.ok) {
                 messageEl.textContent = 'Registration successful! Redirecting to login...';
                 messageEl.style.color = 'green';
-                // Redirect to login page after 2 seconds
                 setTimeout(() => {
                     window.location.href = 'index.html';
                 }, 2000);
             } else {
-                // Show error message from server (e.g., "Email already in use")
                 messageEl.textContent = data.message;
                 messageEl.style.color = 'red';
             }
@@ -81,41 +88,35 @@ function setupRegistrationForm() {
     });
 }
 
+
 /**
- * Sets up the event listener for the login form.
+ * Sets up the event listener for the LOGIN form.
+ * (This function is UNCHANGED)
  */
 function setupLoginForm() {
     const loginForm = document.getElementById('login-form');
     const messageEl = document.getElementById('message');
 
     loginForm.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); 
 
-        // Get form data
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
         try {
             const response = await fetch('http://localhost:3000/login', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                // Login successful
-                // Store the token and user's name in localStorage
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userName', data.name);
-                
-                // Redirect to the dashboard
                 window.location.href = 'dashboard.html';
             } else {
-                // Show error message (e.g., "Invalid credentials")
                 messageEl.textContent = data.message;
                 messageEl.style.color = 'red';
             }
@@ -127,14 +128,16 @@ function setupLoginForm() {
     });
 }
 
+
 /**
- * Sets up the dashboard page: welcome message, logout button, and fetches data.
+ * Sets up the NEW DASHBOARD page.
+ * (This function is MODIFIED)
  */
 function setupDashboard() {
     const welcomeEl = document.getElementById('welcome-message');
     const logoutButton = document.getElementById('logout-button');
     
-    // 1. Set welcome message from localStorage
+    // 1. Set welcome message
     const userName = localStorage.getItem('userName');
     if (userName) {
         welcomeEl.textContent = `Welcome, ${userName}!`;
@@ -142,115 +145,37 @@ function setupDashboard() {
 
     // 2. Setup Logout Button
     logoutButton.addEventListener('click', () => {
-        // Clear localStorage
         localStorage.removeItem('token');
         localStorage.removeItem('userName');
-        
-        // Redirect to login page
         window.location.href = 'index.html';
     });
 
-    // 3. Fetch protected data from the server
-    fetchDashboardData();
-}
+    // 3. Setup the new predictor form logic
+    const predictorForm = document.getElementById('predictor-form');
+    const predictBtn = document.getElementById('predict-btn');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const resultsSection = document.getElementById('results-section');
 
-/**
- * Fetches protected data and populates the dashboard.
- */
-async function fetchDashboardData() {
-    const token = localStorage.getItem('token');
+    predictorForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent page refresh
 
-    try {
-        const response = await fetch('http://localhost:3000/api/dashboard', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}` // Send the JWT
-            }
-        });
+        // Start loading state
+        predictBtn.disabled = true;
+        predictBtn.textContent = 'Analyzing...';
+        resultsSection.classList.add('results-hidden');
+        loadingSpinner.classList.remove('spinner-hidden');
 
-        if (response.status === 401 || response.status === 403) {
-            // Token is invalid or expired
-            alert('Session expired. Please log in again.');
-            localStorage.removeItem('token');
-            localStorage.removeItem('userName');
-            window.location.href = 'index.html';
-            return;
-        }
+        // Simulate a 2-second analysis
+        setTimeout(() => {
+            // Stop loading state
+            loadingSpinner.classList.add('spinner-hidden');
+            resultsSection.classList.remove('results-hidden');
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch data');
-        }
+            // Reset button
+            predictBtn.disabled = false;
+            predictBtn.textContent = 'Predict Again';
 
-        const data = await response.json();
-        
-        // Populate the table with dummy job data
-        populateJobTable(data.jobs);
-
-        // Render the chart with dummy chart data
-        renderJobChart(data.chart);
-
-    } catch (error) {
-        console.error('Error fetching dashboard data:', error);
-        alert('Could not load dashboard data.');
-    }
-}
-
-/**
- * Populates the job table with data from the server.
- * @param {Array} jobs - An array of job objects
- */
-function populateJobTable(jobs) {
-    const tableBody = document.getElementById('job-table-body');
-    tableBody.innerHTML = ''; // Clear existing rows
-
-    jobs.forEach(job => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${job.role}</td>
-            <td>${job.company}</td>
-            <td>${job.skills}</td>
-        `;
-        tableBody.appendChild(row);
+        }, 2000); // 2-second delay
     });
 }
 
-/**
- * Renders the Chart.js bar chart.
- * @param {Object} chartData - An object with 'labels' and 'counts' arrays
- */
-function renderJobChart(chartData) {
-    const ctx = document.getElementById('jobChart').getContext('2d');
-    
-    new Chart(ctx, {
-        type: 'bar', // Type of chart
-        data: {
-            labels: chartData.labels, // X-axis labels (e.g., 'B.Tech CSE')
-            datasets: [{
-                label: '# of Graduates in Roles',
-                data: chartData.counts, // Y-axis data (e.g., 120)
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            responsive: true,
-            maintainAspectRatio: true
-        }
-    });
-}

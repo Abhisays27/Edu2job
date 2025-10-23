@@ -4,39 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Edu2Job</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body id="dashboard-page">
 
-    <header class="dashboard-header">
-        <h1>Edu2Job Dashboard</h1>
-        <div>
-            <span id="welcome-message"></span>
+    <header class="main-header">
+        <h1>Career Path Predictor Dashboard</h1>
+        <div class="user-info">
+            <span id="welcome-message">Loading...</span>
             <button id="logout-button">Logout</button>
         </div>
     </header>
 
-    <main class="container">
-        <h2>Dummy Job Data</h2>
-        <table id="job-table">
-            <thead>
-                <tr>
-                    <th>Job Role</th>
-                    <th>Company</th>
-                    <th>Skills</th>
-                </tr>
-            </thead>
-            <tbody id="job-table-body">
-                </tbody>
-        </table>
+    <div class="container">
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🖥️</div>
+                <div class="stat-info">
+                    <p>Career Matches</p>
+                    <h3>247</h3>
+                    <span>+25% this month</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-info">
+                    <p>Predictions Made</p>
+                    <h3>1.2K</h3>
+                    <span>+23% this week</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-info">
+                    <p>Job Openings</p>
+                    <h3>5.8K</h3>
+                    <span>Updated daily</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-info">
+                    <p>Success Rate</p>
+                    <h3>94%</h3>
+                    <span>Industry testing</span>
+                </div>
+            </div>
+        </section>
 
-        <h2>Education vs. Job Count</h2>
-        <div class="chart-container">
-            <canvas id="jobChart"></canvas>
-        </div>
-    </main>
-    
+        <section class="predictor-section">
+            <h2>Career Path Predictor</h2>
+            <p class="subtitle">Enter your details to get AI-powered career recommendations</p>
+
+            <form id="predictor-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="education">Education Level</label>
+                        <select id="education" name="education">
+                            <option value="bachelors">Bachelor's Degree</option>
+                            <option value="masters">Master's Degree</option>
+                            <option value="phd">PhD</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="field-of-study">Field of Study</label>
+                        <input type="text" id="field-of-study" value="Computer Science">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">Years of Experience</label>
+                        <input type="number" id="experience" value="2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interest">Career Interest</label>
+                        <select id="interest" name="interest">
+                            <option value="technology">Technology</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="design">Design</option>
+                            <option value="finance">Finance</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Preferred Location</label>
+                        <input type="text" id="location" value="Remote">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skills">Key Skills</label>
+                        <input type="text" id="skills" value="Python, JavaScript, SQL">
+                    </div>
+                </div>
+                
+                <button type="submit" id="predict-btn" class="cta-button">Predict Career Paths</button>
+            </form>
+
+            <div id="loading-spinner" class="spinner-hidden"></div>
+        </section>
+
+        <section id="results-section" class="results-hidden">
+            <h2>Your Predicted Career Paths</h2>
+            <p class="subtitle">Based on your profile, here are the top matches.</p>
+
+            <div class="results-list">
+                <div class="result-card">
+                    <h3>Senior Software Engineer <span>(94% Match)</span></h3>
+                    <p class="description">Based on your background in Computer Science with 2 years of experience, you’re an excellent match for senior engineering roles. Your skills align perfectly with modern tech stacks.</p>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">System Design</span>
+                        <span class="tag">Cloud Computing</span>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <h3>Technical Product Manager <span>(87% Match)</span></h3>
+                    <p class="description">Your combination of technical expertise and Bachelor’s Degree makes you ideal for bridging engineering and product teams. Strong communication and analytical skills required.</p>
+                    <div class="tags">
+                        <span class="tag">Agile</span>
+                        <span class="tag">Product Strategy</span>
+                        <span class="tag">Data Analysis</span>
+                        <span class="tag">Stakeholder Management</span>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <h3>Machine Learning Engineer <span>(82% Match)</span></h3>
+                    <p class="description">With your foundation in Computer Science, transitioning to ML engineering is highly viable. The demand for ML specialists continues to grow exponentially.</p>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Deep Learning</span>
+                        <span class="tag">Data Preprocessing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2025 Edu2Job Prototype
+        </footer>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
