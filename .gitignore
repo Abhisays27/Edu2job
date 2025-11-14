@@ -1,1 +1,8 @@
+# Dependencies
+node_modules/
+
+# Python cache
+__pycache__/
+
+# Secret Keys
 serviceAccountKey.json
