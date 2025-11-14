@@ -55,7 +55,7 @@ function setupRegistrationForm() {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/register', {
+            const response = await fetch('https://edu2job-node-backend.onrender.com/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password, college, gender, degree })
@@ -97,7 +97,7 @@ function setupLoginForm() {
         const password = document.getElementById('password').value;
 
         try {
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch('https://edu2job-node-backend.onrender.com/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -287,7 +287,7 @@ function setupDashboard() {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await fetch('http://localhost:3000/predict', {
+            const response = await fetch('https://edu2job-node-backend.onrender.com/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
