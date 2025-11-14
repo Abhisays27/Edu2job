@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Edu2Job</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="dashboard.css">
 </head>
+
 <body id="dashboard-page">
 
     <header class="main-header">
@@ -61,18 +64,149 @@
 
             <form id="predictor-form">
                 <div class="form-grid">
+
                     <div class="form-group">
-                        <label for="education">Education Level</label>
-                        <select id="education" name="education">
-                            <option value="bachelors">Bachelor's Degree</option>
-                            <option value="masters">Master's Degree</option>
-                            <option value="phd">PhD</option>
+                        <label for="degree">Degree</label>
+                        <select id="degree">
+                            <option value="B.Tech">B.Tech</option>
+                            <option value="B.E">B.E</option>
+                            <option value="M.Tech">M.Tech</option>
+                            <option value="MCA">MCA</option>
+                            <option value="BCA">BCA</option>
+                            <option value="B.Sc">B.Sc</option>
+                            <option value="M.Sc">M.Sc</option>
+                            <option value="B.Des">B.Des</option>
+                            <option value="M.Des">M.Des</option>
+                            <option value="BFA">BFA</option>
+                            <option value="B.Com">B.Com</option>
+                            <option value="M.Com">M.Com</option>
+                            <option value="BBA">BBA</option>
+                            <option value="MBA">MBA</option>
+                            <option value="BA">BA</option>
+                            <option value="MA">MA</option>
+                            <option value="B.Ed">B.Ed</option>
+                            <option value="M.Ed">M.Ed</option>
+                            <option value="PhD">PhD</option>
+                            
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="field-of-study">Field of Study</label>
-                        <input type="text" id="field-of-study" value="Computer Science">
+                        <label for="major">Major</label>
+                        <select id="major">
+                            <option value="" disabled selected>Select your major</option>
+                            <option value="AI & ML">AI & ML</option>
+                            <option value="Accounting">Accounting</option>
+                            <option value="Applied Arts">Applied Arts</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Business Administration">Business Administration</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Civil Engineering">Civil Engineering</option>
+                            <option value="Commerce">Commerce</option>
+                            <option value="Communication">Communication</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Cybersecurity">Cybersecurity</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Design">Design</option>
+                            <option value="Digital Media">Digital Media</option>
+                            <option value="Economics">Economics</option>
+                            <option value="Education">Education</option>
+                            <option value="Electrical Engineering">Electrical Engineering</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="English">English</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Fine Arts">Fine Arts</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Journalism">Journalism</option>
+                            <option value="Management">Management</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <option value="Network Security">Network Security</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Psychology">Psychology</option>
+                            <option value="Sociology">Sociology</option>
+                            <option value="Software Engineering">Software Engineering</option>
+                            <option value="Statistics">Statistics</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialization">Specialization</label>
+                        <select id="specialization">
+                            <option value="" disabled selected>Select your specialization</option>
+                            <option value="Academic Writing">Academic Writing</option>
+                            <option value="AI">AI</option>
+                            <option value="Backend Development">Backend Development</option>
+                            <option value="Big Data">Big Data</option>
+                            <option value="Brand Communication">Brand Communication</option>
+                            <option value="Branding">Branding</option>
+                            <option value="Business Analytics">Business Analytics</option>
+                            <option value="Business Strategy">Business Strategy</option>
+                            <option value="Cloud Computing">Cloud Computing</option>
+                            <option value="Computer Vision">Computer Vision</option>
+                            <option value="Content Marketing">Content Marketing</option>
+                            <option value="Corporate Finance">Corporate Finance</option>
+                            <option value="Curriculum Design">Curriculum Design</option>
+                            <option value="Cybersecurity">Cybersecurity</option>
+                            <option value="Data Analytics">Data Analytics</option>
+                            <option value="Data Structures">Data Structures</option>
+                            <option value="Deep Learning">Deep Learning</option>
+                            <option value="Digital Marketing">Digital Marketing</option>
+                            <option value="E-commerce Management">E-commerce Management</option>
+                            <option value="Educational Technology">Educational Technology</option>
+                            <option value="Financial Analysis">Financial Analysis</option>
+                            <option value="Financial Management">Financial Management</option>
+                            <option value="Frontend Development">Frontend Development</option>
+                            <option value="Full Stack Development">Full Stack Development</option>
+                            <option value="Graphic Communication">Graphic Communication</option>
+                            <option value="Higher Education">Higher Education</option>
+                            <option value="Human-Computer Interaction">Human-Computer Interaction</option>
+                            <option value="Instructional Design">Instructional Design</option>
+                            <option value="Interaction Design">Interaction Design</option>
+                            <option value="International Business">International Business</option>
+                            <option value="Investment Banking">Investment Banking</option>
+                            <option value="Machine Learning">Machine Learning</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Marketing Management">Marketing Management</option>
+                            <option value="Media Studies">Media Studies</option>
+                            <option value="Motion Graphics">Motion Graphics</option>
+                            <option value="Networking">Networking</option>
+                            <option value="OOPs Concepts">OOPs Concepts</option>
+                            <option value="Operations">Operations</option>
+                            <option value="Operations and Marketing">Operations and Marketing</option>
+                            <option value="Product Management">Product Management</option>
+                            <option value="Research Methods">Research Methods</option>
+                            <option value="Risk Management">Risk Management</option>
+                            <option value="SEO Strategy">SEO Strategy</option>
+                            <option value="Software Engineering">Software Engineering</option>
+                            <option value="Supply Chain and Marketing">Supply Chain and Marketing</option>
+                            <option value="System Design">System Design</option>
+                            <option value="Teaching">Teaching</option>
+                            <option value="Tech Product">Tech Product</option>
+                            <option value="UI/UX">UI/UX</option>
+                            <option value="User Experience Design">User Experience Design</option>
+                            <option value="User Research">User Research</option>
+                            <option value="Visual Communication">Visual Communication</option>
+                            <option value="Web Technologies">Web Technologies</option>
+                            
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cgpa">CGPA</label>
+                        <input type="number" id="cgpa" value="8.5" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skills">Key Skills (select or type)</label>
+                        <input type="text" id="skills" placeholder="e.g. Python, React, SQL">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certifications">Certifications (select or type)</label>
+                        <input type="text" id="certifications" placeholder="e.g. Coursera, NPTEL">
                     </div>
 
                     <div class="form-group">
@@ -81,26 +215,50 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="interest">Career Interest</label>
-                        <select id="interest" name="interest">
-                            <option value="technology">Technology</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="design">Design</option>
-                            <option value="finance">Finance</option>
+                        <label for="industry">Preferred Industry</label>
+                        <select id="industry">
+                            <option value="" disabled selected>Select an industry</option>
+                            <option value="Advertising">Advertising</option>
+                            <option value="Automotive">Automotive</option>
+                            <option value="Banking">Banking</option>
+                            <option value="Cloud Security">Cloud Security</option>
+                            <option value="Colleges">Colleges</option>
+                            <option value="Cybersecurity">Cybersecurity</option>
+                            <option value="Digital Marketing">Digital Marketing</option>
+                            <option value="E-commerce">E-commerce</option>
+                            <option value="E-Learning">E-Learning</option>
+                            <option value="EdTech">EdTech</option>
+                            <option value="Education">Education</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="FMCG">FMCG</option>
+                            <option value="Finance">Finance</option>
+                            <option value="FinTech">FinTech</option>
+                            <option value="Government/Defense">Government/Defense</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Healthcare Analytics">Healthcare Analytics</option>
+                            <option value="IT Services">IT Services</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Investment Firms">Investment Firms</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Marketing Analytics">Marketing Analytics</option>
+                            <option value="Media">Media</option>
+                            <option value="Product-based">Product-based</option>
+                            <option value="Public Relations">Public Relations</option>
+                            <option value="Research">Research</option>
+                            <option value="Retail">Retail</option>
+                            <option value="Software Development">Software Development</option>
+                            <option value="Startup">Startup</option>
+                            <option value="Startups">Startups</option>
+                            <option value="Tech Consulting">Tech Consulting</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Telecom">Telecom</option>
+                            <option value="Training Institutes">Training Institutes</option>
+                            <option value="Universities">Universities</option>
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label for="location">Preferred Location</label>
-                        <input type="text" id="location" value="Remote">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="skills">Key Skills</label>
-                        <input type="text" id="skills" value="Python, JavaScript, SQL">
-                    </div>
                 </div>
-                
+
                 <button type="submit" id="predict-btn" class="cta-button">Predict Career Paths</button>
             </form>
 
@@ -111,35 +269,16 @@
             <h2>Your Predicted Career Paths</h2>
             <p class="subtitle">Based on your profile, here are the top matches.</p>
 
-            <div class="results-list">
+            <div class="results-list" id="results-list">
                 <div class="result-card">
                     <h3>Senior Software Engineer <span>(94% Match)</span></h3>
-                    <p class="description">Based on your background in Computer Science with 2 years of experience, you’re an excellent match for senior engineering roles. Your skills align perfectly with modern tech stacks.</p>
+                    <p class="description">Based on your background in Computer Science with 2 years of experience,
+                        you’re an excellent match for senior engineering roles. Your skills align perfectly with modern
+                        tech stacks.</p>
                     <div class="tags">
                         <span class="tag">Python</span>
                         <span class="tag">JavaScript</span>
                         <span class="tag">System Design</span>
-                        <span class="tag">Cloud Computing</span>
-                    </div>
-                </div>
-                <div class="result-card">
-                    <h3>Technical Product Manager <span>(87% Match)</span></h3>
-                    <p class="description">Your combination of technical expertise and Bachelor’s Degree makes you ideal for bridging engineering and product teams. Strong communication and analytical skills required.</p>
-                    <div class="tags">
-                        <span class="tag">Agile</span>
-                        <span class="tag">Product Strategy</span>
-                        <span class="tag">Data Analysis</span>
-                        <span class="tag">Stakeholder Management</span>
-                    </div>
-                </div>
-                <div class="result-card">
-                    <h3>Machine Learning Engineer <span>(82% Match)</span></h3>
-                    <p class="description">With your foundation in Computer Science, transitioning to ML engineering is highly viable. The demand for ML specialists continues to grow exponentially.</p>
-                    <div class="tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">TensorFlow</span>
-                        <span class="tag">Deep Learning</span>
-                        <span class="tag">Data Preprocessing</span>
                     </div>
                 </div>
             </div>
@@ -150,6 +289,9 @@
         </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
     <script src="script.js"></script>
 </body>
+
 </html>
