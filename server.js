@@ -11,7 +11,7 @@ const axios = require('axios'); // <-- IMPORT AXIOS
 
 const app = express();
 const PORT = 3000;
-const FLASK_API_URL = 'http://127.0.0.1:5000/predict'; // Python API
+const FLASK_API_URL = 'https://edu2job-python-apii.onrender.com/predict'; // Python API
 
 // ---- Middleware ----
 app.use(cors());
