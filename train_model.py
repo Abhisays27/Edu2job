@@ -10,13 +10,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
+from ml_utils import flatten_data # <-- ADD THIS IMPORT
 
 print("Script started...")
 
-# --- This function MUST be here ---
-def flatten_data(X):
-    return X.ravel()
-# -----------------------------------
 
 # --- Your Full Dropdown Vocabulary ---
 # We use this to teach the model all possible words it might see.

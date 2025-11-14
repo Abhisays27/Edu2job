@@ -3,13 +3,11 @@ import joblib
 import pandas as pd
 import json
 import numpy as np # Make sure numpy is imported
+from ml_utils import flatten_data # <-- ADD THIS IMPORT
 
 print("Starting Flask API...")
 
-# --- This function MUST be here ---
-def flatten_data(X):
-    return X.ravel()
-# -----------------------------------
+
 
 app = Flask(__name__)
 
